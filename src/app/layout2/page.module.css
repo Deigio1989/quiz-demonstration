@@ -32,7 +32,7 @@
 
 /* Navegação entre layouts */
 .layoutSwitcher {
-  position: fixed;
+  position: absolute;
   top: 20px;
   left: 33%;
   transform: translateX(-50%);
@@ -102,7 +102,7 @@
 }
 
 .videoBlurred {
-  filter: blur(4px);
+  filter: blur(10px);
 }
 
 /* Quiz Overlay */
@@ -126,7 +126,7 @@
 }
 
 .quizContainer {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   padding: 30px;
   width: 100%;
