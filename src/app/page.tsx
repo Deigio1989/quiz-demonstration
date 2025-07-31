@@ -97,6 +97,9 @@ export default function Quiz() {
         <Link href="/layout2" className={styles.layoutButton}>
           Layout 2 (Overlay)
         </Link>
+        <Link href="/layout3" className={styles.layoutButton}>
+          Layout 3 (Timeline)
+        </Link>
       </div>
 
       <main className={styles.main}>
