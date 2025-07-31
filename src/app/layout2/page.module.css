@@ -1,23 +1,21 @@
+/* Importa as variáveis de cores do CSS principal */
+@import url("../page.module.css");
+
 .page {
-  /* Variáveis de cores simplificadas */
+  /* Reutiliza as variáveis de cores do CSS principal */
   --bg-dark: #1a1a1a;
   --bg-medium: #333;
   --bg-light: #444;
-
   --text-white: white;
   --text-gray: #ccc;
-
   --success: #4caf50;
   --success-dark: #1b5e20;
   --success-light: #a5d6a7;
-
   --error: #f44336;
   --error-dark: #b71c1c;
   --error-light: #ffcdd2;
-
   --accent: #007acc;
   --accent-hover: #005c99;
-
   --blue: #0121b2;
   --orange: #ff9900;
   --gray: #676767;
@@ -36,7 +34,7 @@
 .layoutSwitcher {
   position: fixed;
   top: 20px;
-  left: 25%;
+  left: 33%;
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
@@ -60,7 +58,6 @@
 
 .layoutButton:hover {
   filter: brightness(1.2);
-
   color: var(--text-white);
 }
 
@@ -73,7 +70,7 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  max-width: 1200px;
+  max-width: 900px;
   width: 100%;
   background: var(--bg-medium);
   color: var(--text-white);
@@ -84,23 +81,16 @@
 }
 
 .title {
-  text-align: left;
-  font-size: 3rem;
+  text-align: center;
+  font-size: 2.5rem;
   color: var(--text-white);
   font-weight: 700;
-  margin-bottom: 10%;
-  padding: 16px 24px;
-}
-
-.contentContainer {
-  display: flex;
-  gap: 40px;
-  align-items: center;
+  margin-bottom: 0;
 }
 
 .videoContainer {
-  flex: 1;
-  min-width: 0;
+  position: relative;
+  width: 100%;
 }
 
 .video {
@@ -108,36 +98,81 @@
   height: auto;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: filter 0.5s ease;
+}
+
+.videoBlurred {
+  filter: blur(4px);
+}
+
+/* Quiz Overlay */
+.quizOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.quizOverlay.fadeIn {
+  opacity: 1;
 }
 
 .quizContainer {
-  flex: 1;
-  min-width: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  justify-content: center;
 }
 
 .progressIndicator {
-  text-align: center;
+  text-align: left;
   font-size: 0.9rem;
   color: var(--text-gray);
   font-weight: 500;
   padding: 8px 16px;
   background: var(--bg-light);
   border-radius: 20px;
-  align-self: center;
+  margin-bottom: 15px;
+  width: fit-content;
+}
+
+.questionHeader {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  gap: 30px;
+}
+
+.questionSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.answersSection {
+  flex: 1;
 }
 
 .questionBlock {
-  padding: 24px;
-  border-radius: 12px;
-  background: var(--bg-medium);
   transition: opacity 0.3s ease-in-out;
-  min-height: 300px;
 }
 
-.fadeIn {
+.fadeInQuestion {
   opacity: 1;
 }
 
@@ -146,38 +181,41 @@
 }
 
 .questionTitle {
-  font-size: 1.3rem;
-  margin: 0 0 20px 0;
+  font-size: 2.5rem;
+  margin: 0;
   color: var(--text-white);
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: left;
 }
 
 .optionsContainer {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
+  align-items: flex-end;
 }
 
 .option {
-  padding: 14px 18px 14px 24px;
+  padding: 12px 16px;
   border: 1px solid var(--bg-light);
-  border-radius: 50px;
+  border-radius: 25px;
   background: var(--bg-light);
   color: var(--text-white);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 1rem;
+  font-size: 0.9rem;
   text-align: left;
   font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  min-width: 150px;
 }
 
 .option:hover:not(:disabled) {
   border-color: var(--text-white);
-  background: var(--bg-dar) !important;
-
+  background: #555;
   transform: translateY(-1px);
 }
 
@@ -208,41 +246,44 @@
 }
 
 .feedbackContainer {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .feedback {
-  padding: 0;
+  padding: 12px;
   border-radius: 8px;
   font-weight: 500;
-  line-height: 0;
+  line-height: 1.4;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .correctFeedback {
-  background-color: var(--success-dark);
-  color: var(--success-light);
+  color: var(--success-dark);
 }
 
 .incorrectFeedback {
-  background-color: var(--error-dark);
-  color: var(--error-light);
+  color: var(--error-dark);
 }
 
 .nextButton {
-  margin-top: 24px;
-  padding: 12px 24px;
+  padding: 10px 20px;
   background: var(--accent);
   color: var(--text-white);
   border: none;
-  border-radius: 50px;
-  font-size: 1rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nextButton:hover:not(:disabled) {
@@ -251,47 +292,121 @@
 }
 
 .nextButtonDisabled {
-  background: var(--bg-dark) !important;
-
+  background: var(--bg-light) !important;
   color: var(--text-gray) !important;
   cursor: not-allowed !important;
   transform: none !important;
 }
 
 .nextButtonDisabled:hover {
-  filter: brightness(1.1);
-
+  background: var(--bg-light) !important;
   transform: none !important;
 }
 
 .completedMessage {
-  margin-top: 24px;
+  margin-top: 20px;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text-white);
+  color: var(--success-light);
   padding: 16px;
   background: var(--success-dark);
-
+  border: 2px solid var(--success);
   border-radius: 8px;
 }
 
 .scoreMessage {
-  margin-top: 12px;
-  font-size: 1rem;
+  margin-top: 10px;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
 .percentage {
   margin-top: 4px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 400;
   opacity: 0.9;
 }
 
+/* Tela de Resultado */
+.resultContainer {
+  background: var(--bg-medium);
+  border-radius: 16px;
+  padding: 50px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--success);
+  text-align: center;
+}
+
+.resultContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.resultTitle {
+  font-size: 2.5rem;
+  color: var(--success-light);
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.resultScore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.scoreNumber {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--success);
+  text-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.scoreText {
+  font-size: 1.3rem;
+  color: var(--text-white);
+  font-weight: 600;
+}
+
+.scorePercentage {
+  font-size: 1.1rem;
+  color: var(--success-light);
+  font-weight: 500;
+  background: var(--success-dark);
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+.restartButton {
+  padding: 15px 30px;
+  background: var(--accent);
+  color: var(--text-white);
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 122, 204, 0.3);
+}
+
+.restartButton:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 122, 204, 0.4);
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
   .page {
-    padding: 16px;
+    padding: 10px;
   }
 
   .layoutSwitcher {
@@ -305,7 +420,7 @@
   }
 
   .main {
-    padding: 24px;
+    padding: 20px;
     margin-top: 80px;
   }
 
@@ -313,22 +428,9 @@
     font-size: 2rem;
   }
 
-  .contentContainer {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .videoContainer {
-    order: 1;
-  }
-
   .quizContainer {
-    order: 2;
-  }
-
-  .questionBlock {
-    min-height: auto;
     padding: 20px;
+    width: 95%;
   }
 
   .questionTitle {
@@ -337,11 +439,37 @@
 
   .option {
     padding: 10px 12px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .nextButton {
-    padding: 10px 20px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .resultContainer {
+    padding: 30px 20px;
+    max-width: 95%;
+  }
+
+  .resultTitle {
+    font-size: 2rem;
+  }
+
+  .scoreNumber {
+    font-size: 3rem;
+  }
+
+  .scoreText {
+    font-size: 1.1rem;
+  }
+
+  .scorePercentage {
+    font-size: 1rem;
+  }
+
+  .restartButton {
+    padding: 12px 24px;
     font-size: 0.9rem;
   }
 }

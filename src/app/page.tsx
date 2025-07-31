@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import styles from "./page.module.css";
 
 interface Question {
@@ -88,6 +89,16 @@ export default function Quiz() {
 
   return (
     <div className={styles.page}>
+      {/* Navegação entre layouts */}
+      <div className={styles.layoutSwitcher}>
+        <Link href="/" className={`${styles.layoutButton} ${styles.active}`}>
+          Layout 1 (Lado a lado)
+        </Link>
+        <Link href="/layout2" className={styles.layoutButton}>
+          Layout 2 (Overlay)
+        </Link>
+      </div>
+
       <main className={styles.main}>
         <div className={styles.contentContainer}>
           <div className={styles.videoContainer}>
